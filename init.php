@@ -306,7 +306,15 @@ class FittingTools {
 
 		$fitter = new Fitting($kll_id);
 		$fitter->getShipStats($shipname);
-		$fitter->buildFit(array_merge($km->getDestroyedItems(), $km->getDroppedItems()));
+		// POS modules don't have any fitting
+		if($shipclass->getID() == 38)
+		{
+		   $fitter->buildFit(array());
+		}
+		else
+		{
+		   $fitter->buildFit(array_merge($km->getDestroyedItems(), $km->getDroppedItems()));
+		}
 
 		$victimShipClassName = $shipclass->getName();
 		$timeStamp = $km->getTimeStamp();
