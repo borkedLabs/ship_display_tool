@@ -238,7 +238,7 @@ class Calculations
  * @param $param_mass (int)
  * @return
  */
-	public function calculateMass($param_mass) {
+	public static function calculateMass($param_mass) {
 		//1.482e+07
 		$break = explode("e+",$param_mass);
 		$exp = 1;
