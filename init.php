@@ -5,7 +5,6 @@ include('Libs/ShipEffects.class.php');
 include('Libs/Calculations.class.php');
 include('Libs/Statistics.class.php');
 include('Libs/Misc.class.php');
-edkloader::register('ItemList', dirname(__FILE__).'/EDKlibs/class.itemlist.php');
 
 define('DS', DIRECTORY_SEPARATOR);
 /**
