@@ -323,16 +323,15 @@ class Statistics
 	 */
 	public static function slots($_slot, $_name, $_cat) {
 		if($_slot == 0) {
-			switch($_name) {
-				case "Drone Bay":
-					return 6;
-				break;
-				case "Medium power slot 1":
-					return 11;
-				break;
-				case "High power slot 1":
-					return 10;
-				break;
+
+			if( strpos($_name, "Medium power slot") !== FALSE ) {
+				return 11;
+			}
+			else if( strpos($_name, "High power slot") !== FALSE ) {
+				return 10;
+			}
+			else if( strpos($_name, "Drone Bay") !== FALSE ) {
+				return 6;
 			}
 		} else {
 			if($_name != "Cargo"
