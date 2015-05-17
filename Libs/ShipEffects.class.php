@@ -168,19 +168,6 @@ class ShipEffect
 			);
 		}
 
-		if(strstr($_input,"rocket damage")
-		|| strstr($_input,"heavy assault missile damage")
-		|| strstr($_input,"bonus to light missile and rocket kinetic damage")
-		|| strstr($_input,"cruise missile and torpedo damage")) {
-			return array(
-				array(
-					'effect' => "damageM",
-					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
-				)
-			);
-		}
-
 		if(strstr($_input,"cap recharge rate")
 		|| strstr($_input,"capacitor recharge time")
 		|| strstr($_input,"capacitor recharge rate")) {
@@ -399,7 +386,8 @@ class ShipEffect
 			);
 		}
 		if(strstr($_input,"explosive, kinetic and thermal missile damage")
-		|| strstr($_input,"em, explosive, and thermal missile damage")) {
+		|| strstr($_input,"em, explosive, and thermal missile damage")
+		|| strstr($_input,"bonus to missile damage")) {
 			return array(
 				array(
 					'effect' => "damageem",
@@ -428,16 +416,6 @@ class ShipEffect
 			return array(
 				array(
 					'effect' => "damageth",
-					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
-				)
-			);
-		}
-
-		if(strstr($_input,"kinetic torpedo damage")) {
-			return array(
-				array(
-					'effect' => "damageki",
 					'bonus' => $_bonus,
 					'type' => self::bonuseffect($_input, $_bonus)
 				)
@@ -543,11 +521,27 @@ class ShipEffect
 		}
 
 		if(strstr($_input,"missile kinetic damage")
+		|| strstr($_input,"kinetic heavy missile and heavy assault missile damage")
 		|| strstr($_input,"kinetic missile damage")
+		|| strstr($_input,"kinetic torpedo damage")
 		|| strstr($_input,"kinetic damage")) {
 			return array(
 				array(
 					'effect' => "damageki",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus)
+				)
+			);
+		}
+
+
+		if(strstr($_input,"rocket damage")
+		|| strstr($_input,"heavy assault missile damage")
+		|| strstr($_input,"bonus to light missile and rocket kinetic damage")
+		|| strstr($_input,"cruise missile and torpedo damage")) {
+			return array(
+				array(
+					'effect' => "damageM",
 					'bonus' => $_bonus,
 					'type' => self::bonuseffect($_input, $_bonus)
 				)

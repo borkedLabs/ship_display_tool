@@ -1524,7 +1524,10 @@ class FittingTools {
 					Fitting::$shipStats->setRSize("Large");
 				}
 
-				if(Fitting::$shipStats->getRSize() == $value['type']) {
+
+				if(Fitting::$shipStats->getRSize() == $value['type']
+				|| Fitting::$shipStats->getShipIcon() == 33818 //orthrus has bonus apply to all size launchers
+				) {
 					if(Fitting::$shipStats->getShipEffects()) {
 						foreach(Fitting::$shipStats->getShipEffects() as $j => $effect) {
 
@@ -1550,7 +1553,6 @@ class FittingTools {
 									}
 								break;
 								case "rofM":
-
 									if($effect['bonus'] == 60) {
 										$rof = Calculations::statOntoShip($rof, (5*5),"-","%", 1);
 									} else {
