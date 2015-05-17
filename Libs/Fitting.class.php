@@ -113,7 +113,7 @@ class Fitting
 			if($ammoData[0]) {
 				foreach($ammoData[0] as $am => $ammo) {
 					$ammocharge = $ammo->item_->getAttribute("usedlauncher");
-					
+
 					if($ammocharge == 483 // Modulated Deep Core Miner II, Modulated Strip Miner II and Modulated Deep Core Strip Miner II
 					|| $ammocharge == 53 // Laser Turrets
 					|| $ammocharge == 55 // Projectile Turrets
@@ -127,9 +127,9 @@ class Fitting
 					) {
 
 						foreach(self::$modSlots[1] as $m => $module) {
-							if($ammocharge == $module["groupID"] 
-								|| ($module["groupID"] == 511 && $ammocharge == 509) 
-								|| ($module["groupID"] == 1245 && $ammocharge == 510)) 
+							if($ammocharge == $module["groupID"]
+								|| ($module["groupID"] == 511 && $ammocharge == 509)
+								|| ($module["groupID"] == 1245 && $ammocharge == 510))
 							{
 								// Assault Missile Lauchers uses same ammo as Standard Missile Lauchers
 								self::$modSlots[10][$m] = $this->moduleInformation(10, $ammo);
@@ -145,7 +145,7 @@ class Fitting
 			if($ammoData[1]) {
 				foreach($ammoData[1] as $ch => $charge) {
 					$chargeAmmo = $charge->item_->getAttribute("usedlauncher");
-					
+
 					if($chargeAmmo == 76 // Capacitor Boosters
 					|| $chargeAmmo == 208 // Remote Sensor Dampeners
 					|| $chargeAmmo == 212 // Sensor Boosters
@@ -196,36 +196,36 @@ class Fitting
 			$arr = self::$shipStats->getShipSlots();
 			for($h = self::$hig; $h < $arr['hislots']; $h++) {
 				self::$modSlots[1][] = array('id'=> 0,
-											'name'=> 'Empty High Slot', 
-											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_hig.png', 
-											'metaLevel' => 0, 
-											'techLevel' => 0, 
-											'capacity' => 0, 
-											'volume' => 0, 
+											'name'=> 'Empty High Slot',
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_hig.png',
+											'metaLevel' => 0,
+											'techLevel' => 0,
+											'capacity' => 0,
+											'volume' => 0,
 											'mass' => 0
 											);
 			}
 
 			for($m = self::$mid; $m < $arr['medslots']; $m++) {
 				self::$modSlots[2][] = array('id'=> 0,
-											'name'=> 'Empty Mid Slot', 
-											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_mid.png', 
-											'metaLevel' => 0, 
-											'techLevel' => 0, 
-											'capacity' => 0, 
-											'volume' => 0, 
+											'name'=> 'Empty Mid Slot',
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_mid.png',
+											'metaLevel' => 0,
+											'techLevel' => 0,
+											'capacity' => 0,
+											'volume' => 0,
 											'mass' => 0
 											);
 			}
 
 			for($l = self::$low; $l < $arr['lowslots']; $l++) {
 				self::$modSlots[3][] = array('id'=> 0,
-											'name'=> 'Empty Low Slot', 
-											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_low.png', 
-											'metaLevel' => 0, 
-											'techLevel' => 0, 
+											'name'=> 'Empty Low Slot',
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_low.png',
+											'metaLevel' => 0,
+											'techLevel' => 0,
 											'capacity' => 0,
-											'volume' => 0, 
+											'volume' => 0,
 											'mass' => 0
 											);
 			}
@@ -233,11 +233,11 @@ class Fitting
 			for($r = self::$rig; $r < $arr['rigslots']; $r++) {
 				self::$modSlots[5][] = array('id'=> 0,
 											'name'=> 'Empty Rig Slot',
-											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_rig.png', 
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_rig.png',
 											'metaLevel' => 0,
-											'techLevel' => 0, 
-											'capacity' => 0, 
-											'volume' => 0, 
+											'techLevel' => 0,
+											'capacity' => 0,
+											'volume' => 0,
 											'mass' => 0
 				);
 			}

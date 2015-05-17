@@ -23,20 +23,19 @@ class ShipEffect
  * @return (int)
  */
 	public static function findEffectName($_input, $_bonus) {
-
 		//echo $_input." | ".$_bonus."<br />";
 
 		if(strstr($_input,"ecm target jammer strength and multiplies the cloaked velocity by 125%")
 		|| strstr($_input,"bonus to large energy turret tracking and multiplies the cloaked velocity by 125%")
-		|| strstr($_input,"bomb em damage")
-		|| strstr($_input,"bomb explosive damage")
-		|| strstr($_input,"bomb thermal damage")
+		|| strstr($_input,"em bomb damage")
+		|| strstr($_input,"explosive bomb damage")
+		|| strstr($_input,"thermal bomb damage")
 		|| strstr($_input,"missile velocity")
-		|| strstr($_input,"torpedo velocity")
+		|| strstr($_input,"torpedo max velocity")
 		|| strstr($_input,"explosion velocity")
 		|| strstr($_input,"velocity factor of stasis webifiers")
 		|| strstr($_input,"sphere launcher rate of fire")
-		|| strstr($_input,"bomb kinetic damage")
+		|| strstr($_input,"kinetic bomb damage")
 		|| strstr($_input,"explosion velocity")
 		|| strstr($_input,"tractor beam")) {
 			return array();
@@ -425,11 +424,40 @@ class ShipEffect
 			);
 		}
 
-		if(strstr($_input,"torpedo thermal damage")
-		|| strstr($_input,"rocket and light missile thermal damage")) {
+		if(strstr($_input,"thermal torpedo damage")) {
 			return array(
 				array(
 					'effect' => "damageth",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus)
+				)
+			);
+		}
+
+		if(strstr($_input,"kinetic torpedo damage")) {
+			return array(
+				array(
+					'effect' => "damageki",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus)
+				)
+			);
+		}
+
+		if(strstr($_input,"explosive torpedo damage")) {
+			return array(
+				array(
+					'effect' => "damageex",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus)
+				)
+			);
+		}
+
+		if(strstr($_input,"em torpedo damage")) {
+			return array(
+				array(
+					'effect' => "damageem",
 					'bonus' => $_bonus,
 					'type' => self::bonuseffect($_input, $_bonus)
 				)
