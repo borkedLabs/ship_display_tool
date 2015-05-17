@@ -1525,12 +1525,11 @@ class FittingTools {
 				}
 
 
-				if(Fitting::$shipStats->getRSize() == $value['type']
-				|| Fitting::$shipStats->getShipIcon() == 33818 //orthrus has bonus apply to all size launchers
-				) {
-					if(Fitting::$shipStats->getShipEffects()) {
-						foreach(Fitting::$shipStats->getShipEffects() as $j => $effect) {
-
+				if(Fitting::$shipStats->getShipEffects()) {
+					foreach(Fitting::$shipStats->getShipEffects() as $j => $effect) {
+						if(Fitting::$shipStats->getRSize() == $value['type']
+						|| (isset($effect['size']) && $effect['size'] == 'all')
+						) {
 							switch($effect['effect']) {
 								case "damageem":
 									if($em != 0) {

@@ -23,7 +23,7 @@ class ShipEffect
  * @return (int)
  */
 	public static function findEffectName($_input, $_bonus) {
-		//echo $_input." | ".$_bonus."<br />";
+		// echo $_input." | ".$_bonus."<br />";
 
 		if(strstr($_input,"ecm target jammer strength and multiplies the cloaked velocity by 125%")
 		|| strstr($_input,"bonus to large energy turret tracking and multiplies the cloaked velocity by 125%")
@@ -370,7 +370,8 @@ class ShipEffect
 				array(
 					'effect' => "damageem",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				)
 			);
 		}
@@ -381,10 +382,31 @@ class ShipEffect
 				array(
 					'effect' => "damageex",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				)
 			);
 		}
+
+		if(strstr($_input,"kinetic and thermal missile damage"))
+		{
+			return array(
+				array(
+					'effect' => "damageki",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
+				),
+				array(
+					'effect' => "damageth",
+					'bonus' => $_bonus,
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
+				)
+			);
+		}
+
+
 		if(strstr($_input,"explosive, kinetic and thermal missile damage")
 		|| strstr($_input,"em, explosive, and thermal missile damage")
 		|| strstr($_input,"bonus to missile damage")) {
@@ -392,22 +414,26 @@ class ShipEffect
 				array(
 					'effect' => "damageem",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				),
 				array(
 					'effect' => "damageth",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				),
 				array(
 					'effect' => "damageki",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				),
 				array(
 					'effect' => "damageex",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				)
 			);
 		}
@@ -427,7 +453,8 @@ class ShipEffect
 				array(
 					'effect' => "damageex",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				)
 			);
 		}
@@ -437,7 +464,8 @@ class ShipEffect
 				array(
 					'effect' => "damageem",
 					'bonus' => $_bonus,
-					'type' => self::bonuseffect($_input, $_bonus)
+					'type' => self::bonuseffect($_input, $_bonus),
+					'size' => 'all'
 				)
 			);
 		}
