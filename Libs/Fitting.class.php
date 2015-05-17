@@ -29,14 +29,13 @@ class Fitting
 		self::$shipStats = new Shipstats();
 	}
 
-
-/**
- * buildFit method
- * Takes the killmail fit, gets a list of typeID's, does 1 DB call to gather all the module stats then organises the killmail setup with slot positions and module data
- *
- * @param $_fit (Object)
- * @return (array)
- */
+	/**
+	 * buildFit method
+	 * Takes the killmail fit, gets a list of typeID's, does 1 DB call to gather all the module stats then organises the killmail setup with slot positions and module data
+	 *
+	 * @param $_fit (Object)
+	 * @return (array)
+	 */
 	public function buildFit($_fit) {
 		$arr = array();
 
@@ -113,21 +112,26 @@ class Fitting
 			//build up the ammo information based on what ammo goes in what gun
 			if($ammoData[0]) {
 				foreach($ammoData[0] as $am => $ammo) {
-					if($ammo->item_->getAttribute("usedlauncher") == 483 // Modulated Deep Core Miner II, Modulated Strip Miner II and Modulated Deep Core Strip Miner II
-					|| $ammo->item_->getAttribute("usedlauncher") == 53 // Laser Turrets
-					|| $ammo->item_->getAttribute("usedlauncher") == 55 // Projectile Turrets
-					|| $ammo->item_->getAttribute("usedlauncher") == 74 // Hybrid Turrets
-					|| ($ammo->item_->getAttribute("usedlauncher") >= 506 && $ammo->item_->getAttribute("usedlauncher") <= 511) // Some Missile Lauchers
-					|| $ammo->item_->getAttribute("usedlauncher") == 481 // Probe Launchers
-					|| $ammo->item_->getAttribute("usedlauncher") == 899 // Warp Disruption Field Generator I
-					|| $ammo->item_->getAttribute("usedlauncher") == 771 // Heavy Assault Missile Launchers
-					|| $ammo->item_->getAttribute("usedlauncher") == 589 // Interdiction Sphere Lauchers
-					|| $ammo->item_->getAttribute("usedlauncher") == 524 // Citadel Torpedo Launchers
+					$ammocharge = $ammo->item_->getAttribute("usedlauncher");
+					
+					if($ammocharge == 483 // Modulated Deep Core Miner II, Modulated Strip Miner II and Modulated Deep Core Strip Miner II
+					|| $ammocharge == 53 // Laser Turrets
+					|| $ammocharge == 55 // Projectile Turrets
+					|| $ammocharge == 74 // Hybrid Turrets
+					|| ($ammocharge >= 506 && $ammocharge <= 511) // Some Missile Lauchers
+					|| $ammocharge == 481 // Probe Launchers
+					|| $ammocharge == 899 // Warp Disruption Field Generator I
+					|| $ammocharge == 771 // Heavy Assault Missile Launchers
+					|| $ammocharge == 589 // Interdiction Sphere Lauchers
+					|| $ammocharge == 524 // Citadel Torpedo Launchers
 					) {
-						$ammocharge = $ammo->item_->getAttribute("usedlauncher");
 
 						foreach(self::$modSlots[1] as $m => $module) {
-							if($ammocharge == $module["groupID"] || ($module["groupID"] == 511 && $ammocharge == 509) || ($module["groupID"] == 1245 && $ammocharge == 510)) {// Assault Missile Lauchers uses same ammo as Standard Missile Lauchers
+							if($ammocharge == $module["groupID"] 
+								|| ($module["groupID"] == 511 && $ammocharge == 509) 
+								|| ($module["groupID"] == 1245 && $ammocharge == 510)) 
+							{
+								// Assault Missile Lauchers uses same ammo as Standard Missile Lauchers
 								self::$modSlots[10][$m] = $this->moduleInformation(10, $ammo);
 								self::buildSettings(10, $ammo, $modData);
 							}
@@ -140,13 +144,15 @@ class Fitting
 			//build up the charge information based on what charge goes in what module
 			if($ammoData[1]) {
 				foreach($ammoData[1] as $ch => $charge) {
-					if($charge->item_->getAttribute("usedlauncher") == 76 // Capacitor Boosters
-					|| $charge->item_->getAttribute("usedlauncher") == 208 // Remote Sensor Dampeners
-					|| $charge->item_->getAttribute("usedlauncher") == 212 // Sensor Boosters
-					|| $charge->item_->getAttribute("usedlauncher") == 291 // Tracking Disruptors
-					|| $charge->item_->getAttribute("usedlauncher") == 213 // Tracking Computers
-					|| $charge->item_->getAttribute("usedlauncher") == 209 // Tracking Links
-					|| $charge->item_->getAttribute("usedlauncher") == 290 // Remote Sensor Boosters
+					$chargeAmmo = $charge->item_->getAttribute("usedlauncher");
+					
+					if($chargeAmmo == 76 // Capacitor Boosters
+					|| $chargeAmmo == 208 // Remote Sensor Dampeners
+					|| $chargeAmmo == 212 // Sensor Boosters
+					|| $chargeAmmo == 291 // Tracking Disruptors
+					|| $chargeAmmo == 213 // Tracking Computers
+					|| $chargeAmmo == 209 // Tracking Links
+					|| $chargeAmmo == 290 // Remote Sensor Boosters
 					) {
 						foreach(self::$modSlots[2] as $m => $module) {
 							if($charge->item_->getAttribute("usedlauncher") == $module["groupID"]) {
@@ -189,19 +195,51 @@ class Fitting
 
 			$arr = self::$shipStats->getShipSlots();
 			for($h = self::$hig; $h < $arr['hislots']; $h++) {
-				self::$modSlots[1][] = array('id'=> 0,'name'=> 'Empty High Slot', 'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_hig.png', 'metaLevel' => 0, 'techLevel' => 0, 'capacity' => 0, 'volume' => 0, 'mass' => 0);
+				self::$modSlots[1][] = array('id'=> 0,
+											'name'=> 'Empty High Slot', 
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_hig.png', 
+											'metaLevel' => 0, 
+											'techLevel' => 0, 
+											'capacity' => 0, 
+											'volume' => 0, 
+											'mass' => 0
+											);
 			}
 
 			for($m = self::$mid; $m < $arr['medslots']; $m++) {
-				self::$modSlots[2][] = array('id'=> 0,'name'=> 'Empty Mid Slot', 'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_mid.png', 'metaLevel' => 0, 'techLevel' => 0, 'capacity' => 0, 'volume' => 0, 'mass' => 0);
+				self::$modSlots[2][] = array('id'=> 0,
+											'name'=> 'Empty Mid Slot', 
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_mid.png', 
+											'metaLevel' => 0, 
+											'techLevel' => 0, 
+											'capacity' => 0, 
+											'volume' => 0, 
+											'mass' => 0
+											);
 			}
 
 			for($l = self::$low; $l < $arr['lowslots']; $l++) {
-				self::$modSlots[3][] = array('id'=> 0,'name'=> 'Empty Low Slot', 'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_low.png', 'metaLevel' => 0, 'techLevel' => 0, 'capacity' => 0, 'volume' => 0, 'mass' => 0);
+				self::$modSlots[3][] = array('id'=> 0,
+											'name'=> 'Empty Low Slot', 
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_low.png', 
+											'metaLevel' => 0, 
+											'techLevel' => 0, 
+											'capacity' => 0,
+											'volume' => 0, 
+											'mass' => 0
+											);
 			}
 
 			for($r = self::$rig; $r < $arr['rigslots']; $r++) {
-				self::$modSlots[5][] = array('id'=> 0,'name'=> 'Empty Rig Slot', 'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_rig.png', 'metaLevel' => 0, 'techLevel' => 0, 'capacity' => 0, 'volume' => 0, 'mass' => 0);
+				self::$modSlots[5][] = array('id'=> 0,
+											'name'=> 'Empty Rig Slot',
+											'iconloc'=> ((Misc::$simpleurl)?Misc::curPageURL():"").'mods/ship_display_tool/images/equipment/icon00_rig.png', 
+											'metaLevel' => 0,
+											'techLevel' => 0, 
+											'capacity' => 0, 
+											'volume' => 0, 
+											'mass' => 0
+				);
 			}
 
 			if(self::$modSlots[0]) {
