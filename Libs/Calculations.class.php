@@ -38,6 +38,14 @@ class Calculations
  * @return (int)
  */
 	public static function effectHP($hp, $em, $th, $ki, $ex) {
+		if( $em >= 100 )
+			$em = 99;
+		if( $th >= 100 )
+			$th = 99;
+		if( $ki >= 100 )
+			$ki = 99;
+		if( $ex >= 100 )
+			$ex = 99;
 		return $hp / (((1-($em/100))+(1-($th/100))+(1-($ki/100))+(1-($ex/100)))/4);
 	}
 
@@ -68,7 +76,15 @@ class Calculations
  * @param $ex (int)
  * @return (int)
  */
-	public static function tankAbleDPS($peakRegen, $em, $th, $ki, $ex) {
+	public static function tankAbleDPS($peakRegen, $em, $th, $ki, $ex) {		
+		if( $em >= 100 )
+			$em = 99;
+		if( $th >= 100 )
+			$th = 99;
+		if( $ki >= 100 )
+			$ki = 99;
+		if( $ex >= 100 )
+			$ex = 99;
 		return 4*$peakRegen/((1-($em/100))+(1-($th/100))+(1-($ki/100))+(1-($ex/100)));
 	}
 
