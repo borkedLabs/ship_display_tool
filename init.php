@@ -345,8 +345,10 @@ class FittingTools {
 		Fitting::$shipStats->setPilotAllianceURL($victimAllianceURL);
 		Fitting::$shipStats->setPilotShipURL($victimShipID);
 		Fitting::$shipStats->setPilotLocURL($systemURL);
+		Fitting::$shipStats->setNearestCelestialName($km->getNearestCelestialName());
+		Fitting::$shipStats->setDistanceToNearestCelestial($km->getDistanceToNearestCelestialFormatted());
 
-
+				
 		//self::getShipStats($shipname);
 		//self::moduleInfo();
 
@@ -2255,6 +2257,9 @@ class FittingTools {
 		$smarty->assign('getPilotLocReg', Fitting::$shipStats->getPilotLocReg());
 		$smarty->assign('getPilotLocSec', Misc::getSystemColour(Fitting::$shipStats->getPilotLocSec()));
 
+		$smarty->assign('getNearestCelestialName', Fitting::$shipStats->getNearestCelestialName());
+		$smarty->assign('getDistanceToNearestCelestial', Fitting::$shipStats->getDistanceToNearestCelestial());
+		
 		$smarty->assign('totcal', Fitting::$shipStats->getCalAmount());
 		$smarty->assign('usedcal', Fitting::$shipStats->getCalUsed());
 		if(Fitting::$shipStats->getCalAmount() == 0) {

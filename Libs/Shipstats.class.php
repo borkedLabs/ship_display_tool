@@ -863,7 +863,21 @@ class Shipstats
 		$this->shipEffects = $input;
 	}
 
+	public function getNearestCelestialName() {
+		return $this->nearestCelestialName;
+	}
 
+	public function setNearestCelestialName($input) {
+		$this->nearestCelestialName = $input;
+	}
+	
+	public function getDistanceToNearestCelestial() {
+		return $this->distanceToNearestCelestial;
+	}
+
+	public function setDistanceToNearestCelestial($input) {
+		$this->distanceToNearestCelestial = $input;
+	}
 
 
 	public function getIsMWD() {

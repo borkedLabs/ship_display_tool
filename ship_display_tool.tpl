@@ -183,6 +183,11 @@
 							<ul id="victimcol2">
 								<li>Ship: <span class="r_wid"><a href='{$getPilotShipURL}'>{$getPilotShip}</a><br />({$getPilotShipClass})</span></li>
 								<li>Location: <span class="r_wid"><a href='{$getPilotLocURL}'>{$getPilotLoc}</a><br /> {$getPilotLocReg} ({$getPilotLocSec})</span></li>
+								{if isset($getDistanceToNearestCelestial) && $getDistanceToNearestCelestial != ""}
+									<li>Nearest Celestial: <span class="r_wid">{$getDistanceToNearestCelestial} from {$getNearestCelestialName}</span></li>
+								{else if $getNearestCelestialName != ""}
+									<li>Nearest Celestial: <span class="r_wid">{$getNearestCelestialName}</span></li>
+								{/if}
 							</ul>
 						</li>
 					</ul>

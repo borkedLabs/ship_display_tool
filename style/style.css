@@ -29,7 +29,7 @@ img {
 #fitcontainer {
 	position: relative;
 	width: 770px;
-	height: 523px;
+	height: 535px;
 	overflow:hidden;
 }
 
@@ -326,7 +326,7 @@ li#d_miscount_8{
 }
 
 #infoBar .libody{
-	height:64px;
+	height:100px;
 }
 
 #victimBodycontainer li {
