@@ -375,7 +375,7 @@ class FittingTools {
  * @param $p_ex_id (int)
  * @return
  */
-	public function source($kill, $kill_id) {
+	public static function source($kill, $kill_id) {
 		global $smarty;
 
 		$verification = false;
