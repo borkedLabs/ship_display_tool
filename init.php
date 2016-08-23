@@ -53,7 +53,7 @@ class FittingTools {
  * @param $home (Object)
  * @return
  */
-	public function addFitting($home) {
+	public static function addFitting($home) {
 		$home->delete("fitting");
 		$home->delete("victim");
 		$home->delete("victimShip");
@@ -69,7 +69,7 @@ class FittingTools {
  * @param $home (Object)
  * @return
  */
-	public function RemoveContextFinalBlowTopDamage($home) {
+	public static function RemoveContextFinalBlowTopDamage($home) {
 		$home->delete("damageBox");
 	}
 
@@ -83,7 +83,7 @@ class FittingTools {
  * @param $home (Object)
  * @return (string) the html output
  */
-	public function displayFitting($home) {
+	public static function displayFitting($home) {
 		global $smarty;
 		$kll_id = $home->kll_id;
 
