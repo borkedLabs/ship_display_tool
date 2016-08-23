@@ -13,7 +13,7 @@
   */
 class Fitting
 {
-	private $ignoreMods = array();
+	private static $ignoreMods = [33400];
 	public static $shipStats;
 	public static $modSlots = array();
 
@@ -23,9 +23,6 @@ class Fitting
 	private static $rig = 0;
 
 	function __construct() {
-		$this->ignoreMods = array(
-			33400 //Bastion Module I
-		);
 		self::$shipStats = new Shipstats();
 	}
 
@@ -48,7 +45,7 @@ class Fitting
 			});
 
 			foreach($_fit as $head => $mods) {
-				if(in_array($mods->item_->getAttribute("typeID"), $this->ignoreMods)) continue;
+				if(in_array($mods->item_->getAttribute("typeID"), self::$ignoreMods)) continue;
 				$typids[] = $mods->item_->getAttribute("typeID");
 			}
 
@@ -282,8 +279,8 @@ class Fitting
  * @param $mods (Object)
  * @return (array)
  */
-	private function buildSettings($_slot, $_mods, $_modData) {
-		if(!in_array($_mods->item_->getAttribute("typeID"), $this->ignoreMods)) {
+	private static function buildSettings($_slot, $_mods, $_modData) {
+		if(!in_array($_mods->item_->getAttribute("typeID"), self::$ignoreMods)) {
 			foreach($_modData[$_mods->item_->getAttribute('typeID')] as $att => $modAttributes) {
 				if($modAttributes['unit'] == "%") $type = $modAttributes['unit'];
 				else $type = "+";
@@ -371,7 +368,7 @@ class Fitting
  * @param $_value (int)
  * @return
  */
-	public function getttShipstatsfrommods($_attributeName, $_value) {
+	public static function getttShipstatsfrommods($_attributeName, $_value) {
 
 		switch($_attributeName) {
 			case "shieldcapacity":
@@ -761,7 +758,7 @@ class Fitting
  * @param $param_unit (string)
  * @return
  */
-	private function negRules($param_input, $param_unit) {
+	private static function negRules($param_input, $param_unit) {
 
 		switch($param_input) {
 			case 'true':
@@ -781,7 +778,7 @@ class Fitting
  * @param $param_input (string)
  * @return
  */
-	private function negConditions($param_input) {
+	private static function negConditions($param_input) {
 		switch(strtolower($param_input)) {
 			case "hp":
 				return 0;
@@ -799,7 +796,7 @@ class Fitting
  * @param $module_param (string)
  * @return
  */
-	private function setTank($module_param) {
+	private static function setTank($module_param) {
 		if(strstr($module_param, "shield booster")
 		|| strstr($module_param, "shield overload")
 		|| strstr($module_param, "clarity ward")
@@ -830,7 +827,7 @@ class Fitting
  * @param $modName (string)
  * @return (bool)
  */
-	private function isReactor($modName) {
+	private static function isReactor($modName) {
 		if(strstr($modName,"reactor control")
 		|| strstr($modName,"reaction control")) {
 			return true;
@@ -846,7 +843,7 @@ class Fitting
  * @param
  * @return
  */
-	public function shipEffects() {
+	public static function shipEffects() {
 		if(self::$shipStats->getShipEffects()) {
 			foreach(self::$shipStats->getShipEffects() as $i => $value) {
 				self::applyShipSkills($value['bonus'], $value['type'], "%", strtolower($value['effect']), true, 5, 1, "", 0, "", 0, 0, 0);
@@ -860,7 +857,7 @@ class Fitting
  * @param $param_input (string)
  * @return
  */
-	public function advancedModuleSettings($param_input) {
+	public static function advancedModuleSettings($param_input) {
 		if(strstr($param_input, "microwarpdrive")
 		|| strstr($param_input, "digital booster")
 		|| strstr($param_input, "y-t8 ")
@@ -898,7 +895,7 @@ class Fitting
  * @param $mass (string)
  * @return
  */
-	private function applyShipSkills($bonus, $type, $mode, $effect, $shipEff, $skillBonus, $negEffect, $groupID, $capacity, $modName, $techLevel, $moduleLevel, $mass) {
+	private static function applyShipSkills($bonus, $type, $mode, $effect, $shipEff, $skillBonus, $negEffect, $groupID, $capacity, $modName, $techLevel, $moduleLevel, $mass) {
 		self::setTank($modName);
 
 		//echo $modName." | ".$bonus." | ".$effect." | ".$groupID."<br />";
@@ -2067,7 +2064,7 @@ class Fitting
  * @param $techLevel (int)
  * @return
  */
-	private function applyDroneSkills($_bonus, $_effect, $_modName, $_techLevel, $_count) {
+	private static function applyDroneSkills($_bonus, $_effect, $_modName, $_techLevel, $_count) {
 		//echo $_bonus." | ".$_effect." | ".$_modName." | ".$_techLevel."<br />";
 
 		switch($_effect) {

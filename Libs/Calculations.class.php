@@ -180,7 +180,7 @@ class Calculations
  * @param $modNum (int)
  * @return (int)
  */
-	private function stackingPenalties($modNum) {
+	private static function stackingPenalties($modNum) {
 		return pow(0.5,pow((($modNum-1)/2.22292081),2));
 	}
 
