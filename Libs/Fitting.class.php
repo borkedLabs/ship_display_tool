@@ -705,7 +705,7 @@ class Fitting
  * @param $sensor_param (string)
  * @return (string)
  */
-	private function getSensorTypeImg($sensor_param) {
+	private static function getSensorTypeImg($sensor_param) {
 
 		switch($sensor_param) {
 			case "radar":
@@ -733,7 +733,7 @@ class Fitting
  * @param $input (int)
  * @return
  */
-	private function returnShipSize($input) {
+	private static function returnShipSize($input) {
 		switch($input) {
 			case "1":
 				return "Small";
